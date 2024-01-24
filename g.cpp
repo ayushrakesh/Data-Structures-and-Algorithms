@@ -2,10 +2,9 @@
 using namespace std;
 int main()
 {
-  int n;
-  cin >> n;
+  int a, b, c;
+  cin >> a >> b >> c;
 
-  string s = bitset<10>(n).to_string().substr(10 - log2(n + 1));
-
-  cout << s << endl;
+  int maxAmount = max(a * c, b * c);
+  cout << maxAmount << endl;
 }
