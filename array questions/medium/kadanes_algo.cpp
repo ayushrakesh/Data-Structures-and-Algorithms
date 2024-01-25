@@ -16,6 +16,33 @@ int maxSubArraySum(vector<int> v)
   }
   return maxi;
 }
+vector<int> maxSubArraySumPrint(vector<int> v)
+{
+  int maxi = INT_MIN;
+  int sum = 0;
+  int start = -1, ansStart = -1, ansEnd = -1;
+
+  for (int i = 0; i < v.size(); i++)
+  {
+    if (sum == 0)
+    {
+      start = i;
+    }
+    sum += v[i];
+    if (sum > maxi)
+    {
+      maxi = sum;
+      ansStart = start;
+      ansEnd = i;
+    }
+    // maxi = max(maxi, sum);
+
+    if (sum < 0)
+      sum = 0;
+  }
+
+  return {ansStart, ansEnd};
+}
 int main()
 {
   int n;
