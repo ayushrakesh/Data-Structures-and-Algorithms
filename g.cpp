@@ -7,4 +7,8 @@ int main()
 
   int maxAmount = max(a * c, b * c);
   cout << maxAmount << endl;
+
+  // vector<int> v = {2, 3};
+
+  // cout << v.at(0) << endl;
 }

@@ -19,6 +19,8 @@ int main()
       v.push_back(a);
     }
 
+    // cout << v.at(0) << endl;
+
     for (int j = 0; j < n; j++)
     {
       if (v[j] + sum < m)
