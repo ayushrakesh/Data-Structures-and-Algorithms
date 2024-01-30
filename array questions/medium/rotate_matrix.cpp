@@ -3,7 +3,7 @@
 using namespace std;
 // The main driver code functionality starts from here
 
-void setMatrixZeroes(vector<vector<int>> &v)
+void rotateMatrix(vector<vector<int>> &v)
 {
 
   for (int i = 0; i < v.size(); i++)
@@ -40,7 +40,7 @@ int main()
     }
   }
 
-  setMatrixZeroes(vec);
+  rotateMatrix(vec);
 
   // for loop to run through the variables m to n
   for (int i = 0; i < n; i++)
