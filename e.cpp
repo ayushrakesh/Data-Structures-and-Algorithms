@@ -1,33 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main()
+
+int maxProductDifference(vector<int> &nums, int k)
 {
-  int q = 0;
-  cin >> q;
 
-  for (int i = 0; i < q; i++)
+  int res = 0;
+  int n = nums.size();
+
+  for (int i = 0; i < n; i++)
   {
-    int n, k;
-    cin >> n >> k;
-    int sum = 0, count = 0;
-    vector<int> v;
-
-    for (int j = 0; j < n; j++)
+    /* code */
+    int sum = 0;
+    for (int j = i; j < n; j++)
     {
-
-      v.push_back(j + 1);
-    }
-
-    for (int j = 0; j < n; j++)
-    {
-      vector<int> w;
-      for (int k = 1; k <= v[j]; k++)
+      sum += nums[j];
+      if (sum == k)
       {
-        if (v[j] % (k) == 0)
-        {
-          w.push_back(k);
-        }
+        res++;
       }
     }
   }
+  return res;
+}
+
+int main()
+{
+  int n;
+  cin >> n;
+  vector<int> v;
+
+  int a;
+  for (int i = 0; i < n; i++)
+  {
+    cin >> a;
+    v.push_back(a);
+  }
+  int k = 0;
+  cin >> k;
+
+  cout << maxProductDifference(v, k) << endl;
 }
