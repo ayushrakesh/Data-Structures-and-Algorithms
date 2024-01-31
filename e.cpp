@@ -1,42 +1,56 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int maxProductDifference(vector<int> &nums, int k)
-{
-
-  int res = 0;
-  int n = nums.size();
-
-  for (int i = 0; i < n; i++)
-  {
-    /* code */
-    int sum = 0;
-    for (int j = i; j < n; j++)
-    {
-      sum += nums[j];
-      if (sum == k)
-      {
-        res++;
-      }
-    }
-  }
-  return res;
-}
-
 int main()
 {
-  int n;
-  cin >> n;
-  vector<int> v;
+  int q = 0;
+  cin >> q;
 
-  int a;
-  for (int i = 0; i < n; i++)
+  for (int h = 0; h < q; h++)
   {
-    cin >> a;
-    v.push_back(a);
-  }
-  int k = 0;
-  cin >> k;
+    int n, k;
+    cin >> n >> k;
 
-  cout << maxProductDifference(v, k) << endl;
+    vector<int> res;
+
+    for (int i = 0; i < k; i++)
+    {
+      res.push_back(i + 1);
+    }
+
+    int temp = k + 2;
+    int tem = k + 1;
+
+    for (int i = res.size(); i < n; i++)
+    {
+      if (temp <= n)
+      {
+        res.push_back(temp);
+        temp = temp + 2;
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    for (int i = res.size(); i < n; i++)
+    {
+      /* code */
+      if (tem <= n)
+      {
+        res.push_back(tem);
+        tem = tem + 2;
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    for (int i = 0; i < res.size(); i++)
+    {
+      cout << res[i] << " ";
+    }
+  }
 }

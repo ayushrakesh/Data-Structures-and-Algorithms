@@ -2,35 +2,74 @@
 using namespace std;
 int main()
 {
-  int q = 0;
-  cin >> q;
+  long long test = 0;
+  cin >> test;
 
-  for (int i = 0; i < q; i++)
+  for (long long h = 0; h < test; h++)
   {
-    int n, m;
-    cin >> n >> m;
-    int sum = 0, count = 0;
-    vector<int> v;
+    long long n, q;
+    cin >> n >> q;
 
-    for (int j = 0; j < n; j++)
+    string s;
+    cin >> s;
+
+    vector<char> cv;
+
+    for (long long i = 0; i < q; i++)
     {
-      int a;
-      cin >> a;
-      v.push_back(a);
+      char c;
+      cin >> c;
+      s = s + c;
+      // cv.push_back(c);
     }
 
-    // cout << v.at(0) << endl;
+    long long i = 0, j = 0;
+    long long maxi = 0;
+    long long curr = 0;
 
-    for (int j = 0; j < n; j++)
+    for (; j < s.length();)
     {
-      if (v[j] + sum < m)
+      if (s[i] == s[j])
       {
-        sum += v[j];
-        continue;
+        curr++;
+        j++;
       }
-      count++;
-      sum = 0;
+      else
+      {
+        // i = j;
+        curr = 1;
+        j++;
+        i = j;
+      }
+
+      maxi = max(curr, maxi);
+
+      if (j >= n - 1)
+      {
+        cout << maxi << endl;
+      }
     }
-    cout << count << endl;
+
+    // cout << maxi << endl;
+
+    // for (long long k = 0; k < q; k++)
+    // {
+    //   s = s + cv[k];
+
+    //   if (s[i] == s[j])
+    //   {
+    //     curr++;
+    //     j++;
+    //   }
+    //   else
+    //   {
+    //     i = j;
+    //     curr = 1;
+    //     j++;
+    //   }
+    //   maxi = max(curr, maxi);
+
+    //   cout << maxi << endl;
+    // }
   }
 }
