@@ -21,6 +21,22 @@ int binarySearch(vector<int> v, int target)
 
   return -1;
 }
+
+int binarySearchRec(vector<int> v, int low, int high, int target)
+{
+  int mid = (low + high) / 2;
+  if (low > high)
+    return -1;
+
+  else if (target == v[mid])
+    return mid;
+  else if (target > v[mid])
+    return binarySearchRec(v, mid + 1, high, target);
+
+  else
+    return binarySearchRec(v, low, mid - 1, target);
+}
+
 int main()
 {
   int n;
@@ -38,4 +54,5 @@ int main()
   cin >> target;
 
   cout << binarySearch(v, target) << endl;
+  cout << binarySearchRec(v, 0, n - 1, target) << endl;
 }
