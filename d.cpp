@@ -1,75 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int main()
 {
-  long long test = 0;
-  cin >> test;
+  int q = 0;
+  cin >> q;
 
-  for (long long h = 0; h < test; h++)
+  for (int i = 0; i < q; i++)
   {
-    long long n, q;
-    cin >> n >> q;
-
+    int n;
+    cin >> n;
     string s;
     cin >> s;
 
-    vector<char> cv;
+    int count = 0;
 
-    for (long long i = 0; i < q; i++)
+    int en = 0;
+    int st = 0;
+
+    for (int j = 0; j < n; j++)
     {
-      char c;
-      cin >> c;
-      s = s + c;
-      // cv.push_back(c);
-    }
-
-    long long i = 0, j = 0;
-    long long maxi = 0;
-    long long curr = 0;
-
-    for (; j < s.length();)
-    {
-      if (s[i] == s[j])
+      if (s[j] == 'B')
       {
-        curr++;
-        j++;
-      }
-      else
-      {
-        // i = j;
-        curr = 1;
-        j++;
-        i = j;
-      }
-
-      maxi = max(curr, maxi);
-
-      if (j >= n - 1)
-      {
-        cout << maxi << endl;
+        st = j;
+        break;
       }
     }
 
-    // cout << maxi << endl;
+    for (int k = n - 1; k >= 0; k--)
+    {
+      if (s[k] == 'B')
+      {
+        en = k;
+        break;
+      }
+    }
 
-    // for (long long k = 0; k < q; k++)
-    // {
-    //   s = s + cv[k];
-
-    //   if (s[i] == s[j])
-    //   {
-    //     curr++;
-    //     j++;
-    //   }
-    //   else
-    //   {
-    //     i = j;
-    //     curr = 1;
-    //     j++;
-    //   }
-    //   maxi = max(curr, maxi);
-
-    //   cout << maxi << endl;
-    // }
+    cout << en - st + 1 << endl;
   }
 }

@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 int main()
@@ -6,51 +7,107 @@ int main()
   int q = 0;
   cin >> q;
 
-  for (int h = 0; h < q; h++)
+  for (int l = 0; l < q; l++)
   {
-    int n, k;
-    cin >> n >> k;
+    int n, m, k;
+    cin >> n >> m >> k;
 
-    vector<int> res;
+    vector<int> a;
+    int z = 0;
 
-    for (int i = 0; i < k; i++)
+    vector<int> b;
+
+    for (int i = 0; i < n; i++)
     {
-      res.push_back(i + 1);
+      cin >> z;
+      a.push_back(z);
     }
 
-    int temp = k + 2;
-    int tem = k + 1;
-
-    for (int i = res.size(); i < n; i++)
+    for (int i = 0; i < m; i++)
     {
-      if (temp <= n)
+      cin >> z;
+      b.push_back(z);
+    }
+
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+
+    int i = 0, j = 0;
+    int count = 1;
+    int c1 = 0, c2 = 0;
+
+    vector<int> w, v;
+
+    for (int i = 0; i < n; i++)
+    {
+      if (a[i] <= k)
       {
-        res.push_back(temp);
-        temp = temp + 2;
+        w.push_back(a[i]);
+      }
+    }
+
+    for (int i = 0; i < m; i++)
+    {
+      if (b[i] <= k)
+      {
+        v.push_back(b[i]);
+      }
+    }
+
+    int mini = min(w.size(), v.size());
+
+    for (; i < mini && j < mini;)
+    {
+      if (w[i] == count)
+      {
+        c1++;
+        count++;
+        i++;
+      }
+      else if (v[j] == count)
+      {
+        c2++;
+        count++;
+        j++;
       }
       else
       {
-        break;
+        i++;
+        j++;
       }
     }
 
-    for (int i = res.size(); i < n; i++)
+      if (c1 < k / 2)
     {
-      /* code */
-      if (tem <= n)
+      for (; i < w.size(); i++)
       {
-        res.push_back(tem);
-        tem = tem + 2;
-      }
-      else
-      {
-        break;
+        /* code */
+        if (w[i] == count)
+        {
+          count++;
+        }
       }
     }
 
-    for (int i = 0; i < res.size(); i++)
+    if (c2 < k / 2)
     {
-      cout << res[i] << " ";
+      for (; j < v.size(); j++)
+      {
+        /* code */
+        if (v[j] == count)
+        {
+          count++;
+        }
+      }
+    }
+
+    if (count == k)
+    {
+      cout << "YES" << endl;
+    }
+    else
+    {
+      cout << "NO" << endl;
     }
   }
 }

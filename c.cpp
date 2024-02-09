@@ -6,20 +6,69 @@ int main()
   int q = 0;
   cin >> q;
 
-  for (int i = 0; i < q; i++)
+  map<char, int> hashing = {
+      {'a', 0},
+      {'b', 0},
+      {'c', 0},
+      {'d', 0},
+      {'e', 0},
+      {'f', 0},
+      {'g', 0},
+      {'h', 0},
+      {'i', 0},
+      {'j', 0},
+      {'k', 0},
+      {'l', 0},
+      {'m', 0},
+      {'n', 0},
+      {'o', 0},
+      {'p', 0},
+      {'q', 0},
+      {'r', 0},
+      {'s', 0},
+      {'t', 0},
+      {'u', 0},
+      {'v', 0},
+      {'w', 0},
+      {'x', 0},
+      {'y', 0},
+      {'z', 0},
+  };
+
+  // for (int i = 0; i < s.size(); i++)
+  // {
+  //   hashing[s[i] - 'a']++;
+  // }
+
+  for (int l = 0; l < q; l++)
   {
-    float p, l;
-    cin >> p >> l;
+    int n = 0;
+    cin >> n;
 
-    float per = (l / p) * 100;
+    vector<int> v;
+    int a = 0;
+    string s = "";
 
-    if (per >= 75)
+    for (int i = 0; i < n; i++)
     {
-      cout << "YES" << endl;
+      cin >> a;
+      v.push_back(a);
     }
-    else
+
+    for (int i = 0; i < v.size(); i++)
     {
-      cout << "NO" << endl;
+
+      for (auto it : hashing)
+      {
+        if (it.second == v[i])
+        {
+          it.second++;
+          s.push_back(it.first);
+          break;
+        }
+      }
     }
+
+    cout << s << endl;
   }
 }

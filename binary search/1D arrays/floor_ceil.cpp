@@ -27,6 +27,35 @@ int floorValue(vector<int> v, int target)
   return v[ans];
 }
 
+int ceilValue(vector<int> v, int target)
+{
+  int n = v.size();
+  int ans = -1;
+  int low = 0, high = n - 1;
+
+  while (low <= high)
+  {
+    /* code */
+    int mid = (low + high) / 2;
+    if (v[mid] >= target)
+    {
+      ans = mid;
+      high = mid - 1;
+    }
+    else
+    {
+      low = mid + 1;
+    }
+  }
+  if (ans == -1)
+  {
+    return -1;
+  }
+  else
+  {
+    return v[ans];
+  }
+}
 int main()
 {
   int n;
@@ -41,5 +70,7 @@ int main()
   }
   int target = 0;
   cin >> target;
+
   cout << floorValue(v, target) << endl;
+  cout << ceilValue(v, target) << endl;
 }
