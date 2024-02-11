@@ -39,20 +39,20 @@ int searchRotatedSorted(vector<int> v, int target)
   return -1;
 }
 
-int searchRotatedSortedDuplicates(vector<int> v, int target)
+bool searchRotatedSortedDuplicates(vector<int> nums, int target)
 {
-  int n = v.size();
+  int n = nums.size();
   int low = 0, high = n - 1;
 
   while (low <= high)
   {
     int mid = (low + high) / 2;
 
-    if (v[mid] == target)
-      return mid;
+    if (nums[mid] == target)
+      return true;
 
     // Shrinking the search space in case of duplicates
-    if (v[mid] == v[low] && v[mid] == v[high])
+    if (nums[mid] == nums[low] && nums[mid] == nums[high])
     {
       low++;
       high--;
@@ -60,9 +60,9 @@ int searchRotatedSortedDuplicates(vector<int> v, int target)
     }
     ////////////////////////////////////////////////
 
-    if (v[low] <= v[mid])
+    if (nums[low] <= nums[mid])
     {
-      if (target >= v[low] && target <= v[mid])
+      if (target >= nums[low] && target <= nums[mid])
       {
         high = mid - 1;
       }
@@ -73,7 +73,7 @@ int searchRotatedSortedDuplicates(vector<int> v, int target)
     }
     else
     {
-      if (target >= v[mid] && target <= v[high])
+      if (target >= nums[mid] && target <= nums[high])
       {
         low = mid + 1;
       }
@@ -83,7 +83,7 @@ int searchRotatedSortedDuplicates(vector<int> v, int target)
       }
     }
   }
-  return -1;
+  return false;
 }
 int main()
 {

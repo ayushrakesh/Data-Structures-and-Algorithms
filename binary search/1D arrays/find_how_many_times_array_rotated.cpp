@@ -3,12 +3,13 @@
 using namespace std;
 
 // Both for unique and duplicates element
-int minimumInRotatedSorted(vector<int> v)
+int howManyTimesArrayRotated(vector<int> v)
 {
   int n = v.size();
   int low = 0;
   int high = n - 1;
   int mini = INT_MAX;
+  int index = -1;
 
   while (low <= high)
   {
@@ -18,15 +19,25 @@ int minimumInRotatedSorted(vector<int> v)
     if (v[low] <= v[mid])
     {
       mini = min(mini, v[low]);
+
+      if (mini == v[low])
+      {
+        index = low;
+      }
       low = mid + 1;
     }
     else
     {
       mini = min(mini, v[mid]);
+
+      if (mini == v[mid])
+      {
+        index = mid;
+      }
       high = mid - 1;
     }
   }
-  return mini;
+  return index;
 }
 
 int main()
@@ -42,5 +53,5 @@ int main()
     v.push_back(a);
   }
 
-  cout << minimumInRotatedSorted(v) << endl;
+  cout << howManyTimesArrayRotated(v) << endl;
 }
