@@ -6,69 +6,91 @@ int main()
   int q = 0;
   cin >> q;
 
-  map<char, int> hashing = {
-      {'a', 0},
-      {'b', 0},
-      {'c', 0},
-      {'d', 0},
-      {'e', 0},
-      {'f', 0},
-      {'g', 0},
-      {'h', 0},
-      {'i', 0},
-      {'j', 0},
-      {'k', 0},
-      {'l', 0},
-      {'m', 0},
-      {'n', 0},
-      {'o', 0},
-      {'p', 0},
-      {'q', 0},
-      {'r', 0},
-      {'s', 0},
-      {'t', 0},
-      {'u', 0},
-      {'v', 0},
-      {'w', 0},
-      {'x', 0},
-      {'y', 0},
-      {'z', 0},
-  };
-
-  // for (int i = 0; i < s.size(); i++)
-  // {
-  //   hashing[s[i] - 'a']++;
-  // }
-
-  for (int l = 0; l < q; l++)
+  for (int i = 0; i < q; i++)
   {
-    int n = 0;
-    cin >> n;
+    int a, b;
+    cin >> a >> b;
 
-    vector<int> v;
-    int a = 0;
-    string s = "";
-
-    for (int i = 0; i < n; i++)
+    if (a % 2 == 1 && b % 2 == 1)
     {
-      cin >> a;
-      v.push_back(a);
+      cout << "NO" << endl;
+      continue;
     }
-
-    for (int i = 0; i < v.size(); i++)
+    if (a % 2 == 0 && b % 2 == 1)
     {
+      int c = a / 2;
+      int d = b;
 
-      for (auto it : hashing)
+      int a2 = 2 * c;
+
+      if (a + b != d + a2)
       {
-        if (it.second == v[i])
-        {
-          it.second++;
-          s.push_back(it.first);
-          break;
-        }
+        cout << "YES" << endl;
+        continue;
       }
+
+      int b2 = 2 * d;
+
+      if (a + b != b2 + c)
+      {
+        cout << "YES" << endl;
+        continue;
+      }
+
+      cout << "NO" << endl;
+      continue;
     }
 
-    cout << s << endl;
+    else if (b % 2 == 0 && a % 2 == 1)
+    {
+
+      int c = b / 2;
+      int d = a;
+
+      int a2 = 2 * c;
+
+      if (a + b != a2 + d)
+      {
+        cout << "YES" << endl;
+        continue;
+      }
+
+      int b2 = 2 * d;
+
+      if (a + b != b2 + c)
+      {
+        cout << "YES" << endl;
+        continue;
+      }
+      cout << "NO" << endl;
+      continue;
+    }
+
+    else
+    {
+      int f = a / 2;
+      int g = b / 2;
+
+      int f2 = 2 * f;
+
+      if (a + b != f2 + g)
+      {
+        cout << "YES" << endl;
+        continue;
+      }
+
+      int g2 = 2 * g;
+
+      if (a + b != g2 + f)
+      {
+        cout << "YES" << endl;
+        continue;
+      }
+
+      cout << "NO" << endl;
+      continue;
+    }
+
+    // cout << "YES" << endl;
   }
 }
