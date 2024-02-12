@@ -54,5 +54,5 @@ int main()
 
   cout << kokoEatingBananas(v, h) << endl;
 
-  cout << *max_element(v.begin(), v.end());
+  // cout << *max_element(v.begin(), v.end());
 }
