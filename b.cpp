@@ -1,63 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int main()
 {
+  // your code goes here
   int q = 0;
   cin >> q;
 
-  for (int l = 0; l < q; l++)
+  for (int i = 0; i < q; i++)
   {
-    int n = 0;
+    int n;
     cin >> n;
 
-    vector<int> v;
-    int a = 0;
-    int sum = 0;
-    for (int i = 0; i < n; i++)
-    {
-      cin >> a;
-      sum += a;
-      v.push_back(a);
-    }
-
     if (n == 1)
-    {
-      cout << "YES" << endl;
-      continue;
-      // return 0;
-    }
-    int req = sum / n;
-    int flag = 0;
+      cout << 1 << " " << 1 << endl;
 
-    long long excess = 0;
-
-    for (int i = 0; i < n; i++)
-    {
-      if (v[i] >= req)
-      {
-        excess += (v[i] - req);
-      }
-      else
-      {
-        int req_amt = req - v[i];
-        if (excess >= req_amt)
-        {
-          excess -= req_amt;
-        }
-        else
-        {
-          cout << "NO" << endl;
-          flag = true;
-          break;
-        }
-      }
-    }
-
-    if (!flag)
-    {
-
-      cout << "YES" << endl;
-    }
-    // return;
+    // else if (n % 2 == 0)
+    //   cout << n / 2 << " " << n / 2 << endl;
+    else
+      cout << ceil(n / 2.0) << " " << ceil(n / 3.0) << endl;
   }
 }

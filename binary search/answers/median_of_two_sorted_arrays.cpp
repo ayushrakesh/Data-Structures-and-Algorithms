@@ -78,14 +78,15 @@ double medianOfTwoSortedArraysOptimal(vector<int> &v, vector<int> &w)
   int left = (n1 + n2 + 1) / 2;
   int low = 0, high = n1;
 
-  int l1 = INT_MIN, l2 = INT_MIN;
-  int r1 = INT_MAX, r2 = INT_MAX;
-
   int n = n1 + n2;
 
   while (low <= high)
   {
     /* code */
+
+    int l1 = INT_MIN, l2 = INT_MIN;
+    int r1 = INT_MAX, r2 = INT_MAX;
+
     int mid1 = (low + high) / 2;
     int mid2 = left - mid1;
 
@@ -136,6 +137,6 @@ int main()
     w.push_back(b);
   }
 
-  cout << medianOfTwoSortedArrays(v, w) << endl;
+  // cout << medianOfTwoSortedArrays(v, w) << endl;
   cout << medianOfTwoSortedArraysOptimal(v, w) << endl;
 }
