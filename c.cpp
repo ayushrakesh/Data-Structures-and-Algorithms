@@ -6,44 +6,34 @@ int main()
   int q = 0;
   cin >> q;
 
-  for (int i = 0; i < q; i++)
+  for (int o = 0; o < q; o++)
   {
-    int n;
-    cin >> n;
-    vector<int> v;
-    vector<int> w;
-    int a = 0;
+    long long k, x, a;
+    cin >> k >> x >> a;
 
-    for (int j = 0; j < n; j++)
+    long long v = 0;
+    bool g = false;
+
+    for (int i = 0; g && i < x; i++)
     {
-      cin >> a;
-      v.push_back(a);
-    }
-    w = v;
+      /* code */ long long b = (v - 1 + k) / (k - 1);
 
-    if (n == 1)
+      if (b == 0)
+        v++;
+      else
+      {
+        v = v + b;
+      }
+
+      if (v <= a)
+        g = true;
+      else
+        g = false;
+    }
+
+    if (k * (a - v) > a)
       cout << "YES" << endl;
-    else if (n == 2)
-    {
-      if (v[0] <= v[1])
-        cout << "YES" << endl;
-      else
-      {
-        cout << "NO" << endl;
-      }
-    }
-    else if (n == 3)
-    {
-      if (v[1] < min(v[0], v[2]) || v[1] > max(v[0], v[2]))
-      {
-        cout << "NO" << endl;
-      }
-      else
-      {
-        cout << "YES" << endl;
-      }
-    }
     else
-      cout << "YES" << endl;
+      cout << "NO" << endl;
   }
 }

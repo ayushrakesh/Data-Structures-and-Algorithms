@@ -3,21 +3,30 @@ using namespace std;
 
 int main()
 {
-  // your code goes here
   int q = 0;
   cin >> q;
 
-  for (int i = 0; i < q; i++)
+  for (int o = 0; o < q; o++)
   {
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
 
-    if (n == 1)
-      cout << 1 << " " << 1 << endl;
+    // int t = 2 * n;
+    int count = 0;
+    int sum = 0;
 
-    // else if (n % 2 == 0)
-    //   cout << n / 2 << " " << n / 2 << endl;
+    if (k <= 2 * (2 * n - 2))
+    {
+      count = (k + 1) / 2;
+    }
+    else if (k == (2 * (2 * n - 2)) + 1)
+    {
+      count = ((k + 1) / 2) + 1;
+    }
     else
-      cout << ceil(n / 2.0) << " " << ceil(n / 3.0) << endl;
+    {
+      count = ((k + 1) / 2) + 2;
+    }
+    cout << count << endl;
   }
 }
