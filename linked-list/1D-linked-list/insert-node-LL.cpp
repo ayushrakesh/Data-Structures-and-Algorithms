@@ -13,6 +13,17 @@ public:
     this->next = next1;
   }
 };
+void traverseLL(Node *head)
+{
+  Node *temp = head;
+
+  while (temp)
+  {
+    cout << temp->data << " ";
+    temp = temp->next;
+  }
+  cout << endl;
+}
 Node *arrayToLL(vector<int> &v)
 {
   Node *head = new Node(v[0], nullptr);
@@ -57,7 +68,9 @@ int main()
   vector<int> v = {10, 1, 2, 3, 4};
 
   Node *head = arrayToLL(v);
-  Node *newHead = insertInLL(head, 6, 5);
+  traverseLL(head);
+  Node *newHead = insertInLL(head, 3, 5);
+  traverseLL(newHead);
 
-  cout << newHead->next->next->next->next->next->data << endl;
+  // cout << newHead->next->next->next->next->next->data << endl;
 }
