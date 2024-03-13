@@ -24,7 +24,6 @@ Node *arrayToLL(vector<int> &v)
     mover->next = newNode;
     mover = mover->next;
   }
-
   return head;
 }
 void traverseLL(Node *head)
@@ -38,8 +37,40 @@ void traverseLL(Node *head)
   }
   cout << endl;
 }
-
 bool isCycle(Node *head)
+{
+  Node *slow = head;
+  Node *fast = head;
+
+  while (fast != NULL && fast->next != NULL)
+  {
+    slow = slow->next;
+    fast = fast->next;
+
+    if (slow = fast)
+      return true;
+    /* code */
+  }
+  return false;
+}
+// Finding starting point of cycle -> if not return null -> using map
+Node *findStartingPoint(Node *head)
+{
+  map<Node *, int> mmp;
+
+  Node *temp = head;
+
+  while (temp)
+  {
+    if (mmp.find(temp) != mmp.end())
+      return temp;
+    mmp[temp] = 1;
+    temp = temp->next;
+  }
+  return NULL;
+}
+// Tortoise - Hare algorithm
+Node *findStartingPointMehtod2(Node *head)
 {
   Node *slow = head;
   Node *fast = head;
@@ -50,10 +81,19 @@ bool isCycle(Node *head)
     fast = fast->next->next;
 
     if (slow == fast)
-      return true;
+    {
+      slow = head;
+      while (slow != fast)
+      {
+        slow = slow->next;
+        fast = fast->next;
+        /* code */
+      }
+      return slow;
+    }
     /* code */
   }
-  return false;
+  return NULL;
 }
 int main()
 {
