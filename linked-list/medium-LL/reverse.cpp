@@ -66,6 +66,20 @@ Node *reverseLL(Node *head)
   }
   return left;
 }
+Node *reverseLLRecursive(Node *head)
+{
+
+  if (head == NULL | head->next == NULL)
+    return head;
+
+  Node *newhead = reverseLLRecursive(head->next);
+
+  Node *temp = head->next;
+  temp->next = head;
+  head->next = NULL;
+
+  return newhead;
+}
 int main()
 {
   vector<int> v = {10};
