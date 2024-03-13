@@ -15,7 +15,18 @@ public:
     this->prev = prev1;
   }
 };
+int lengthOfDLL(Node *head)
+{
+  int count = 0;
+  Node *temp = head;
 
+  while (temp)
+  {
+    count++;
+    temp = temp->next;
+  }
+  return count;
+}
 Node *arrayToDLL(vector<int> v)
 {
   Node *head = new Node(v[0], nullptr, nullptr);
@@ -65,9 +76,43 @@ Node *insertInDLL(Node *head, int pos, int val)
 
   newNode->next = temp->next;
   newNode->prev = temp;
-  temp->next->prev = newNode;
+
+  if (temp->next != NULL)
+  {
+    temp->next->prev = newNode;
+  }
   temp->next = newNode;
 
+  return head;
+}
+Node *deleteInDLL(Node *head, int pos)
+{
+  if (pos == 1)
+  {
+    Node *temp = head;
+    temp->next->prev = NULL;
+    head = temp->next;
+    return head;
+  }
+
+  int cnt = 1;
+
+  Node *temp = head;
+  Node *temp2 = head->next;
+
+  while (cnt < pos - 1)
+  {
+    temp = temp->next;
+    temp2 = temp2->next;
+    cnt++;
+  }
+
+  temp->next = temp2->next;
+
+  if (temp2->next != NULL)
+  {
+    temp2->next->prev = temp2->next;
+  }
   return head;
 }
 
@@ -78,8 +123,10 @@ int main()
   Node *head = arrayToDLL(v);
 
   traverseDLL(head);
+  cout << lengthOfDLL(head) << endl;
 
-  Node *newHead = insertInDLL(head, 5, 9);
+  Node *newHead = deleteInDLL(head, 4);
 
   traverseDLL(newHead);
+  cout << lengthOfDLL(newHead) << endl;
 }
