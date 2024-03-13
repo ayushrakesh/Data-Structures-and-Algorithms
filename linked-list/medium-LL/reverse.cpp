@@ -49,28 +49,30 @@ int lengthOfLL(Node *head)
   }
   return count;
 }
-bool searchInLL(Node *head, int val)
-{
-  Node *temp = head;
 
-  while (temp)
+Node *reverseLL(Node *head)
+{
+  Node *left = NULL;
+  Node *mid = head;
+  Node *right = NULL;
+
+  while (mid)
   {
     /* code */
-    if (temp->data == val)
-      return true;
-    else
-      temp = temp->next;
+    right = mid->next;
+    mid->next = left;
+    left = mid;
+    mid = right;
   }
-  return false;
+  return left;
 }
 int main()
 {
-  vector<int> v = {10, 1, 2, 3, 4};
+  vector<int> v = {10};
 
   Node *head = arrayToLL(v);
 
-  cout << head->data << endl;
-
-  cout << lengthOfLL(head) << endl;
-  cout << searchInLL(head, 2) << endl;
+  traverseLL(head);
+  Node *newHead = reverseLL(head);
+  traverseLL(newHead);
 }
