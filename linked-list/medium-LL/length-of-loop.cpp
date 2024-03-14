@@ -38,7 +38,7 @@ void traverseLL(Node *head)
   cout << endl;
 }
 // Brute way using map
-int lengthOfLoopBrute(Node *temp)
+int lengthOfLoopBrute(Node *head)
 {
   map<Node *, int> mmp;
   Node *temp = head;
@@ -61,7 +61,8 @@ int lengthOfLoopBrute(Node *temp)
 // Optimal solution  for length of a loop -> Tortoise hare algo -> O(n)
 int lengthOfLoop(Node *head)
 {
-  Node *slow, fast = head;
+  Node *slow = head;
+  Node *fast = head;
   bool flag = false;
 
   while (fast != NULL && fast->next != NULL)
@@ -98,8 +99,8 @@ int main()
 
   Node *head = arrayToLL(v);
 
-  cout << head->data << endl;
+  cout << head->next->next->next->next->next << endl;
 
-  cout << lengthOfLL(head) << endl;
-  cout << searchInLL(head, 2) << endl;
+  // cout << lengthOfLL(head) << endl;
+  // cout << searchInLL(head, 2) << endl;
 }
