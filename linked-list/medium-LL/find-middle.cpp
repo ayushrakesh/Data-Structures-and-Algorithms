@@ -50,7 +50,7 @@ Node *arrayToLL(vector<int> &v)
   return head;
 }
 
-Node *findMiddle(Node *head)
+Node *findMiddleBrute(Node *head)
 {
   int cnt = 0;
   Node *temp = head;

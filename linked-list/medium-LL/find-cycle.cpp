@@ -39,6 +39,23 @@ void traverseLL(Node *head)
   cout << endl;
 }
 
+bool isCycleBrute(Node *head)
+{
+  map<Node *, int> mmp;
+  Node *temp = head;
+
+  while (temp)
+  {
+    if (mmp.find(temp) != mmp.end())
+    {
+      return true;
+    }
+    mmp[temp] = 1;
+
+    temp = temp->next;
+  }
+  return false;
+}
 bool isCycle(Node *head)
 {
   Node *slow = head;

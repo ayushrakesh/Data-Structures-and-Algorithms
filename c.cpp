@@ -8,32 +8,54 @@ int main()
 
   for (int o = 0; o < q; o++)
   {
-    long long k, x, a;
-    cin >> k >> x >> a;
+    int n;
+    cin >> n;
+    vector<int> v;
+    int a = 0;
 
-    long long v = 0;
-    bool g = false;
-
-    for (int i = 0; g && i < x; i++)
+    for (int i = 0; i < n; i++)
     {
-      /* code */ long long b = (v - 1 + k) / (k - 1);
-
-      if (b == 0)
-        v++;
-      else
-      {
-        v = v + b;
-      }
-
-      if (v <= a)
-        g = true;
-      else
-        g = false;
+      cin >> a;
+      v.push_back(a);
     }
 
-    if (k * (a - v) > a)
-      cout << "YES" << endl;
-    else
-      cout << "NO" << endl;
+    int index = 0;
+    vector<int> res;
+
+    int cnt0 = 0;
+    for (int i = 0; i < n; i++)
+    {
+      if (v[i] == 0)
+      {
+        v[i] = 1;
+        cnt0++;
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    int cnt1 = 0;
+    int maxi = 0;
+    int temp = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+      if (v[i] == 1)
+      {
+        cnt1++;
+        maxi = max(maxi, cnt1);
+      }
+      else
+      {
+        cnt1 = 0;
+        // break;
+      }
+    }
+
+    res.push_back(maxi);
+
+    cout << *max_element(res.begin(), res.end()) << endl;
   }
 }

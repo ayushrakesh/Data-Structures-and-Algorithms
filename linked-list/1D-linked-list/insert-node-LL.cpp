@@ -69,7 +69,7 @@ int main()
 
   Node *head = arrayToLL(v);
   traverseLL(head);
-  Node *newHead = insertInLL(head, 3, 5);
+  Node *newHead = insertInLL(head, 6, 5);
   traverseLL(newHead);
 
   // cout << newHead->next->next->next->next->next->data << endl;

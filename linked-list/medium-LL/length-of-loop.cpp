@@ -37,48 +37,60 @@ void traverseLL(Node *head)
   }
   cout << endl;
 }
-
-// Finding starting point of cycle -> if not return null -> using map
-Node *findStartingPointOfCycleBrute(Node *head)
+// Brute way using map
+int lengthOfLoopBrute(Node *temp)
 {
   map<Node *, int> mmp;
-
   Node *temp = head;
+  int timer = 1;
 
   while (temp)
   {
     if (mmp.find(temp) != mmp.end())
-      return temp;
-    mmp[temp] = 1;
+    {
+      int value = mmp[temp];
+      return timer - value;
+    }
+    mmp[temp] = timer;
+    timer++;
+
     temp = temp->next;
   }
-  return NULL;
+  return 0;
 }
-// Tortoise - Hare algorithm
-Node *findStartingPointOfCycle(Node *head)
+// Optimal solution  for length of a loop -> Tortoise hare algo -> O(n)
+int lengthOfLoop(Node *head)
 {
-  Node *slow = head;
-  Node *fast = head;
+  Node *slow, fast = head;
+  bool flag = false;
 
   while (fast != NULL && fast->next != NULL)
   {
     slow = slow->next;
     fast = fast->next->next;
+    /* code */
 
     if (slow == fast)
     {
-      slow = head;
-      while (slow != fast)
-      {
-        slow = slow->next;
-        fast = fast->next;
-        /* code */
-      }
-      return slow;
+      int cnt = 0;
+      flag = true;
+      break;
     }
-    /* code */
   }
-  return NULL;
+
+  if (flag)
+  {
+    int cnt = 1;
+    slow = slow->next;
+    while (slow != fast)
+    {
+      slow = slow->next;
+      cnt++;
+      /* code */
+    }
+    return cnt;
+  }
+  return 0;
 }
 int main()
 {
