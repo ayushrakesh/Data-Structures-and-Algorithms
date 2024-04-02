@@ -37,26 +37,33 @@ void traverseLL(Node *head)
   }
   cout << endl;
 }
-void *deleteNodeLL(Node *node)
-{
-  node->data = node->next->data;
-  node->next = node->next->next;
 
-  return 0;
+Node *aggregateOddEven(Node *head)
+{
+  Node *odd = head->next;
+  Node *even = head->next->next;
+
+  while (even != NULL && even->next != NULL)
+  {
+    Node *newOdd = new Node(odd->data, nullptr);
+    odd->next = newOdd;
+
+    Node *newEven = new Node(even->data, nullptr);
+    even->next = newEven;
+
+    odd = odd->next->next;
+    even = even->next->next;
+    }
 }
 
 int main()
 {
-  vector<int> v = {0, 8, 2, 3, 4};
+  vector<int> v = {10, 1, 2, 3, 4};
 
   Node *head = arrayToLL(v);
-  // Node *newHead = insertInLL(head, 6, 5);
-
-  // cout << newHead->next->next->next->next->next->data << endl;
-
-  traverseLL(head);
-  deleteNodeLL(head->next->next);
-  traverseLL(head);
 
   cout << head->data << endl;
+
+  cout << lengthOfLL(head) << endl;
+  cout << searchInLL(head, 2) << endl;
 }

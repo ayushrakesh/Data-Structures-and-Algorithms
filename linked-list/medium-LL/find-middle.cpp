@@ -50,6 +50,7 @@ Node *arrayToLL(vector<int> &v)
   return head;
 }
 
+// brute approach -> by length of linked-list
 Node *findMiddleBrute(Node *head)
 {
   int cnt = 0;

@@ -3,20 +3,19 @@ using namespace std;
 
 int main()
 {
-  // your code goes here
   int q = 0;
   cin >> q;
 
-  for (int i = 0; i < q; i++)
+  for (int o = 0; o < q; o++)
   {
-    int x, y;
-    cin >> x >> y;
+    int t = 0;
+    cin >> t;
 
-    if (x < 50)
-      cout << "Z" << endl;
-    else if (x >= 50 && y < 50)
-      cout << "F" << endl;
+    if (t == 1)
+      cout << 6 << endl;
+    else if (t % 2 == 0)
+      cout << 6 * t + t / 2 << endl;
     else
-      cout << "A" << endl;
+      cout << 6 * t + t / 2 + 6 << endl;
   }
 }

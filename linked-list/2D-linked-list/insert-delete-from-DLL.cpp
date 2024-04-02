@@ -118,15 +118,15 @@ Node *deleteInDLL(Node *head, int pos)
 
 int main()
 {
-  vector<int> v = {8, 2, 3, 4};
+  vector<int> v = {8, 2, 3, 4, 9};
 
   Node *head = arrayToDLL(v);
 
   traverseDLL(head);
   cout << lengthOfDLL(head) << endl;
 
-  Node *newHead = deleteInDLL(head, 4);
+  // Node *newHead = deleteInDLL(head, 4);
 
-  traverseDLL(newHead);
-  cout << lengthOfDLL(newHead) << endl;
+  // traverseDLL(newHead);
+  // cout << lengthOfDLL(newHead) << endl;
 }

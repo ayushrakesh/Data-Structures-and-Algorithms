@@ -85,7 +85,7 @@ bool checkPalindrome(Node *head)
   Node *slow = head;
   Node *fast = head;
 
-  while (fast != NULL && fast->next != NULL)
+  while (fast->next != NULL && fast->next->next != NULL)
   {
     slow = slow->next;
     fast = fast->next->next;
@@ -114,7 +114,7 @@ bool checkPalindrome(Node *head)
 }
 int main()
 {
-  vector<int> v = {1, 2, 2, 1};
+  vector<int> v = {1, 2};
 
   Node *head = arrayToLL(v);
 
