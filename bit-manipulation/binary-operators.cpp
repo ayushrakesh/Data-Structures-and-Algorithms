@@ -14,6 +14,29 @@ int findKthBit(int n, int k)
   else
     return 1;
 }
+int setKthBit(int &l, int k)
+{
+  return (l | (1 << k));
+}
+int clearKthBit(int l, int k)
+{
+  return (l & ~(1 << k));
+}
+int toggleKthBit(int l, int k)
+{
+  return l ^ (1 << k);
+}
+void checkNIsPowerOf2(int l)
+{
+  if (l & (l - 1) == 0)
+  {
+    cout << "YES" << endl;
+  }
+  else
+  {
+    cout << "NO" << endl;
+  }
+}
 int main()
 {
   int a = 2;
@@ -53,7 +76,23 @@ int main()
   cout << "-------------" << endl;
 
   int k = 1;
-  cout << findKthBit(2, k) << endl;
+  cout << findKthBit(9, 0) << endl;
 
+  cout << "-------------" << endl;
+
+  int l = 4;
+  cout << setKthBit(l, 2) << endl;
+  cout << "-------------" << endl;
+
+  int m = 6;
+  cout << clearKthBit(m, 0) << endl;
+  cout << "-------------" << endl;
+
+  int t = 7;
+  cout << toggleKthBit(l, 2) << endl;
+  cout << "-------------" << endl;
+
+  int o = 16;
+  checkNIsPowerOf2(o);
   cout << "-------------" << endl;
 }
