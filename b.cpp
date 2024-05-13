@@ -5,17 +5,29 @@ int main()
 {
   int q = 0;
   cin >> q;
-
-  for (int o = 0; o < q; o++)
+  while (q--)
   {
-    int t = 0;
-    cin >> t;
+    int n;
+    cin >> n;
 
-    if (t == 1)
-      cout << 6 << endl;
-    else if (t % 2 == 0)
-      cout << 6 * t + t / 2 << endl;
-    else
-      cout << 6 * t + t / 2 + 6 << endl;
+    vector<int> v;
+    int a = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+      cin >> a;
+      v.push_back(a);
+    }
+
+    sort(v.begin(), v.end());
+
+    int cnt = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+      /* code */
+      cnt = cnt + abs(v[i] - i);
+    }
+    cout << cnt << endl;
   }
 }

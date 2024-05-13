@@ -65,28 +65,25 @@ double powXOpt(float x, int n)
 }
 float powXnRecursive(float x, int n)
 {
-  long long m;
-  if (n < 0)
-  {
-    m = abs(n);
-  }
-  if (n == 0 || m == 0)
+  if (n == 0)
     return 1;
-  if (n == 1 || m == 1)
-    return x;
-
-  float rec;
 
   if (n < 0)
   {
-    rec = powXnRecursive(x, m - 1);
-    return 1.00 / (rec * x);
+    n = -n;
+  }
+  float f = powXnRecursive(x, n / 2);
+
+  if (n % 2 == 0)
+  {
+    return f * f;
   }
   else
   {
-    rec = powXnRecursive(x, n - 1);
-    return rec * x;
+    return f * f * x;
   }
+
+  else return 1.00 / f;
 }
 int main()
 {
@@ -95,5 +92,5 @@ int main()
 
   cin >> x >> n;
 
-  cout << powXOpt(x, n) << endl;
+  cout << powXnRecursive(x, n) << endl;
 }

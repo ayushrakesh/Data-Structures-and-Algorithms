@@ -5,13 +5,18 @@ int main()
 {
   int q = 0;
   cin >> q;
-
-  for (int o = 0; o < q; o++)
+  while (q--)
   {
     int n;
-    cin >> n;
-    vector<int> v;
+    int l, r;
+
+    cin >> n >> l >> r;
+
     int a = 0;
+    vector<int> v;
+    int h = 0;
+    int mini = 0;
+    int maxi = 0;
 
     for (int i = 0; i < n; i++)
     {
@@ -19,43 +24,26 @@ int main()
       v.push_back(a);
     }
 
-    int index = 0;
-    vector<int> res;
-
-    int cnt0 = 0;
     for (int i = 0; i < n; i++)
     {
-      if (v[i] == 0)
+      if (v[i] <= r && v[i] >= l)
       {
-        v[i] = 1;
-        cnt0++;
+        // maxi++;
+
+        h++;
+
+        // mini = min(h, mini);
       }
       else
       {
-        break;
+        // mini--;
+        h--;
+
+        // maxi = max(maxi, h);
       }
+      maxi = max(maxi, h);
+      mini = min(h, mini);
     }
-
-    int cnt1 = 0;
-    int maxi = 0;
-    int temp = 0;
-
-    for (int i = 0; i < n; i++)
-    {
-      if (v[i] == 1)
-      {
-        cnt1++;
-        maxi = max(maxi, cnt1);
-      }
-      else
-      {
-        cnt1 = 0;
-        // break;
-      }
-    }
-
-    res.push_back(maxi);
-
-    cout << *max_element(res.begin(), res.end()) << endl;
+    cout << maxi << " " << mini << endl;
   }
 }
