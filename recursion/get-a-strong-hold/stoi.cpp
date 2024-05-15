@@ -84,6 +84,56 @@ int atoi(string s)
 
   return sign * n;
 }
+pair<int, int> giveInteger(string s, int i, int sign)
+{
+
+  if (s[i] > 57 || s[i] < 48)
+  {
+    return make_pair(0, 0);
+  }
+
+  pair<int, int> temp = giveInteger(s, i + 1, sign);
+
+  // if(temp.first >INT_MAX && sign==1){
+  //   return make_pair(INT_MAX,0);
+  // }
+  // else if(temp.first >INT_MAX && sign==-1){
+  //   return make_pair(INT_MIN,0);
+  // }
+  return make_pair(temp.first + (s[i] - 48) * pow(10, temp.second), temp.second + 1);
+}
+int recurSiveAToi(string s)
+{
+  int l = s.size();
+  int i = 0;
+  int sign = 1;
+
+  while (i < l && s[i] == ' ')
+  {
+    /* code */ i++;
+  }
+
+  if (s[i] == '+')
+  {
+    i++;
+  }
+  else if (s[i] == '-')
+  {
+    sign = -1;
+    i++;
+  }
+  pair<int, int> temp = giveInteger(s, i, sign);
+
+  if (temp.first > INT_MAX && sign == 1)
+  {
+    return INT_MAX;
+  }
+  else if (temp.first > -INT_MIN && sign == -1)
+  {
+    return INT_MIN;
+  }
+  return sign * temp.first;
+}
 int main()
 {
   string s;

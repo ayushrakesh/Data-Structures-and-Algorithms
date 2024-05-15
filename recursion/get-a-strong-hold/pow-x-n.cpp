@@ -82,8 +82,7 @@ float powXnRecursive(float x, int n)
   {
     return f * f * x;
   }
-
-  else return 1.00 / f;
+  return 1.00 / f;
 }
 int main()
 {
