@@ -37,6 +37,7 @@ void checkNIsPowerOf2(int l)
     cout << "NO" << endl;
   }
 }
+
 int main()
 {
   int a = 2;
@@ -76,12 +77,12 @@ int main()
   cout << "-------------" << endl;
 
   int k = 1;
-  cout << findKthBit(9, 0) << endl;
+  cout << findKthBit(10, 0) << endl;
 
   cout << "-------------" << endl;
 
   int l = 4;
-  cout << setKthBit(l, 2) << endl;
+  cout << setKthBit(l, 1) << endl;
   cout << "-------------" << endl;
 
   int m = 6;
