@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 int prec(char c)
 {
   if (c == '+' || c == '-')
