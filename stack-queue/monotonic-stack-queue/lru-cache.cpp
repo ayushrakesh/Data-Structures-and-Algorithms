@@ -96,12 +96,7 @@ public:
 
 int main()
 {
+  // not correct
   LRUCache *a = new LRUCache(5);
   a->put(1, new Node())
 }
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache* obj = new LRUCache(capacity);
- * int param_1 = obj->get(key);
- * obj->put(key,value);
- */
