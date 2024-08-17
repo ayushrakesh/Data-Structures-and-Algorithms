@@ -8,15 +8,9 @@ int main()
   while (q--)
   {
     int n;
-    int l, r;
-
-    cin >> n >> l >> r;
-
-    int a = 0;
+    cin >> n;
     vector<int> v;
-    int h = 0;
-    int mini = 0;
-    int maxi = 0;
+    int a = 0;
 
     for (int i = 0; i < n; i++)
     {
@@ -24,26 +18,20 @@ int main()
       v.push_back(a);
     }
 
+    sort(v.begin(), v.end());
+    bool f = false;
     for (int i = 0; i < n; i++)
     {
-      if (v[i] <= r && v[i] >= l)
+      if ((i + 1) - v[i] < 0)
       {
-        // maxi++;
-
-        h++;
-
-        // mini = min(h, mini);
+        cout << "NO" << endl;
+        f = true;
+        break;
       }
-      else
-      {
-        // mini--;
-        h--;
-
-        // maxi = max(maxi, h);
-      }
-      maxi = max(maxi, h);
-      mini = min(h, mini);
     }
-    cout << maxi << " " << mini << endl;
+    if (!f)
+    {
+      cout << "YES" << endl;
+    }
   }
 }

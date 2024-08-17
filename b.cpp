@@ -3,15 +3,20 @@ using namespace std;
 
 int main()
 {
+  // your code goes here
   int q = 0;
   cin >> q;
+
   while (q--)
   {
     int n;
-    cin >> n;
+    int m;
+    cin >> n >> m;
 
-    vector<int> v;
-    int a = 0;
+    vector<long long> v, w;
+    long long a = 0;
+    unordered_map<long long, long long> mp;
+    long long ways = 0;
 
     for (int i = 0; i < n; i++)
     {
@@ -19,15 +24,28 @@ int main()
       v.push_back(a);
     }
 
-    sort(v.begin(), v.end());
-
-    int cnt = 0;
+    for (int i = 0; i < n; i++)
+    {
+      long long rem = v[i] % m;
+      mp[rem]++;
+    }
 
     for (int i = 0; i < n; i++)
     {
-      /* code */
-      cnt = cnt + abs(v[i] - i);
+      cin >> a;
+      w.push_back(a);
     }
-    cout << cnt << endl;
+
+    for (int i = 0; i < n; i++)
+    {
+      long long rem = w[i] % m;
+
+      if (mp.find((m - rem) % m) != mp.end())
+      {
+        ways += mp[(m - rem) % m];
+      }
+    }
+
+    cout << ways << endl;
   }
 }

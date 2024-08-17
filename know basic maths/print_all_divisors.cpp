@@ -16,7 +16,7 @@ int method1(int n)
   return count;
 }
 
-void method2(int num)
+int method2(int num)
 {
   // int count = 0;
 
@@ -60,7 +60,7 @@ void method2(int num)
   //   return false;
   // }
 
-  cout << count << " " << sum << endl;
+  return count;
 }
 
 int main()
@@ -70,7 +70,7 @@ int main()
   cin >> n;
 
   // cout << method1(n) << endl;
-  // cout << method2(n) << endl;
+  cout << method2(n) << endl;
 
-  method2(n);
+  // method2(n);
 }
