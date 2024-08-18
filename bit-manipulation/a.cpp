@@ -1,31 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
-void print_divisors(int n)
+int countKConstraintSubstrings(string s, int k)
 {
-  // Code here.
-  vector<int> res, temp;
+  int n = s.size();
+  int cnt = 0;
 
-  for (int i = 1; i <= sqrt(n); i++)
+  for (int i = 0; i < n; i++)
   {
-    if (n % i == 0)
+    int cnt0 = 0, cnt1 = 0;
+    for (int j = i; j < n; j++)
     {
-      res.push_back(i);
-      // cout<<i<<" ";
+      if (s[j] == '0')
+      {
+        cnt0++;
+      }
+      else
+      {
+        cnt1++;
+      }
+
+      if ((cnt0 <= k) || (cnt1 <= k))
+      {
+        cnt++;
+      }
+      else
+      {
+        break;
+      }
     }
   }
-  for (int i = 0; i < res.size(); i++)
-  {
-    cout << res[i] << " ";
-  }
-  for (int i = res.size() - 1; i >= 0; i--)
-  {
-    if (res[i] != sqrt(n))
-    {
-      cout << (n / res[i]) << " ";
-    }
-  }
+  return cnt;
 }
 int main()
 {
-  print_divisors(100);
 }

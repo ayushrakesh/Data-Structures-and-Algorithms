@@ -1,34 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
-int minDifference(int n, vector<int> &arr, int x)
+long long maxEnergyBoost(vector<int> &energyDrinkA, vector<int> &energyDrinkB)
 {
-  // code here
-  int res = INT_MAX;
-  bool flag = false;
+  int n = energyDrinkA.size();
+  long long maxi = 0;
+  int i = 0, j = 0;
+  bool b = false;
 
-  for (int i = 0; i < n; i++)
+  while (i < n && j < n)
   {
-    for (int j = i + 1; j < n; j++)
+    if ((energyDrinkA[i] + energyDrinkA[i + 1]) >= energyDrinkB[j + 1])
     {
-      if ((arr[i] ^ arr[j]) <= x)
+      b = true;
+      maxi = maxi + energyDrinkA[i];
+      if (i == (n - 2) && b)
       {
-        flag = true;
-        int diff = abs(arr[i] - arr[j]);
-        res = min(res, diff);
+        maxi = maxi + energyDrinkA[n - 1];
+        break;
       }
+      i++;
+      j++;
+    }
+    else
+    {
+      if ((j + 1) != (n - 1))
+      {
+        maxi = maxi + energyDrinkB[j + 1];
+      }
+      b = false;
+      if (j == (n - 2) && !b)
+      {
+        maxi = maxi + energyDrinkB[n - 1];
+        break;
+      }
+      i++;
+      j++;
     }
   }
-  if (!flag)
-  {
-    return -1;
-  }
-  return res;
+  return maxi;
 }
 int main()
 {
-  vector<int> v = {1, 4, 2, 8};
-
-  cout << minDifference(4, v, 2) << endl;
-
-  cout << fixed << setprecision(2) << 5.23500 << endl;
 }
