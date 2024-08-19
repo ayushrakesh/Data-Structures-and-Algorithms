@@ -1,6 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int brute(vector<int> &nums, int goal)
+{
+  int cnt = 0;
+  int n = nums.size();
+
+  for (int i = 0; i < n; i++)
+  {
+    int sum = 0;
+    for (int j = i; j < n; j++)
+    {
+      sum += nums[j];
+
+      if (sum > goal)
+      {
+        break;
+      }
+      else if (sum == goal)
+      {
+        cnt++;
+      }
+    }
+  }
+  return cnt;
+}
 // gives the no. of subarrays where sum<=goal
 int fun(vector<int> &nums, int goal)
 {
