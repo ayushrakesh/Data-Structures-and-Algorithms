@@ -4,13 +4,13 @@ using namespace std;
 class TreeNode
 {
 public:
-  int data;
+  int val;
   TreeNode *left;
   TreeNode *right;
 
   TreeNode(int d)
   {
-    this->data = d;
+    this->val = d;
     left = right = nullptr;
   }
 };
@@ -22,8 +22,35 @@ void solvein(TreeNode *root, vector<int> &inorder)
     return;
   }
   solvein(root->left, inorder);
-  inorder.push_back(root->data);
+  inorder.push_back(root->val);
   solvein(root->right, inorder);
+}
+void solveinIt(TreeNode *root, vector<int> &inorder)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  stack<TreeNode *> st;
+  while (true)
+  {
+    TreeNode *node = st.top();
+    if (node != NULL)
+    {
+      st.push(node);
+      node = node->left;
+    }
+    else
+    {
+      if (!st.empty())
+      {
+        node = st.top();
+        st.pop();
+        inorder.push_back(node->val);
+        node = node->right;
+      }
+    }
+  }
 }
 void solvepre(TreeNode *root, vector<int> &preorder)
 {
@@ -31,9 +58,36 @@ void solvepre(TreeNode *root, vector<int> &preorder)
   {
     return;
   }
-  preorder.push_back(root->data);
+  preorder.push_back(root->val);
   solvepre(root->left, preorder);
   solvepre(root->right, preorder);
+}
+void solvepreIt(TreeNode *root, vector<int> &preorder)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  stack<TreeNode *> st;
+  st.push(root);
+
+  while (!st.empty())
+  {
+    TreeNode *node = st.top();
+    preorder.push_back(st.top()->val);
+    st.pop();
+
+    // TreeNode *r = root->right;
+    if (node->right != NULL)
+    {
+      st.push(node->right);
+    }
+    // TreeNode *l = root->left;
+    if (node->left != NULL)
+    {
+      st.push(node->left);
+    }
+  }
 }
 void solvepost(TreeNode *root, vector<int> &postorder)
 {
@@ -43,7 +97,7 @@ void solvepost(TreeNode *root, vector<int> &postorder)
   }
   solvepost(root->left, postorder);
   solvepost(root->right, postorder);
-  postorder.push_back(root->data);
+  postorder.push_back(root->val);
 }
 void bfs(TreeNode *root, vector<vector<int>> &res)
 {
@@ -69,7 +123,7 @@ void bfs(TreeNode *root, vector<vector<int>> &res)
       {
         que.push(curr->right);
       }
-      level.push_back(curr->data);
+      level.push_back(curr->val);
     }
     res.push_back(level);
   }
@@ -95,5 +149,5 @@ vector<vector<int>> getTreeTraversal(TreeNode *root)
 int main()
 {
   TreeNode *root = new TreeNode(1);
-  cout << root->data << endl;
+  cout << root->val << endl;
 }
