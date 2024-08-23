@@ -1,30 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int solve(TreeNode *root)
+int solve(TreeNode *root, int &maxi)
 {
   if (root == NULL)
   {
     return 0;
   }
-  int l = solve(root->left);
-  int r = solve(root->right);
+  int l = max(0, solve(root->left, maxi));
+  int r = max(0, solve(root->right, maxi));
 
-  int t = l + r + root->val;
-  int maxi = max(r, l);
-  // maxi = max(maxi, r);
-  int u = root->val + l;
-  int v = root->val + r;
-  maxi = max(maxi, u);
-  maxi = max(maxi, v);
-  maxi = max(maxi, t);
-  return maxi;
+  maxi = max(root->val + l + r, maxi);
+  return root->val + max(l, r);
 }
 int maxPathSum(TreeNode *root)
 {
-  int maxi = 0;
-  return solve(root);
-  // return maxi;
+  int maxi = INT_MIN;
+  solve(root, maxi);
+  return maxi;
 }
 
 int main()
