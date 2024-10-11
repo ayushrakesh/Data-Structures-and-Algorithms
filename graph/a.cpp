@@ -1,66 +1,62 @@
 #include <iostream>
-#include <utility> // For using std::pair
-#include <cstdlib> // For rand()
-#include <ctime>   // For seeding rand()
+#include <utility>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main()
 {
-  const int size = 15;      // Size of the array for 15 users
-  pair<int, int> vec[size]; // Array to store pairs of (arrival time, service time)
-  pair<int, int> ans[size]; // Output array
+  const int n = 15;
+  pair<int, int> users[n];
+  pair<int, int> sorted[n];
 
-  // Seed the random number generator
   srand(static_cast<unsigned>(time(0)));
 
-  // Fill vec with random service times and arrival times (keeping arrival times fixed for simplicity)
-  for (int i = 0; i < size; i++)
+  for (int i = 0; i < n; i++)
   {
-    vec[i].first = i + 1;            // Simulate arrival time as increasing sequence (1, 2, ..., 15)
-    vec[i].second = rand() % 20 + 1; // Random service time between 1 and 20
-    ans[i] = {-1, -1};               // Initialize ans with (-1, -1)
+    users[i].first = i + 1;
+    users[i].second = rand() % 20 + 1;
+    sorted[i] = {-1, -1};
   }
 
-  int b = 0, l = size - 1;
-  int vecSize = size; // To track the remaining elements in the input array
+  int start = 0, end = n - 1;
+  int remaining = n;
 
-  while (vecSize > 0)
+  while (remaining > 0)
   {
-    pair<int, int> p = vec[0];
-    int r = 0;
+    pair<int, int> min_user = users[0];
+    int index = 0;
 
-    for (int i = 1; i < vecSize; i++)
+    for (int i = 1; i < remaining; i++)
     {
-      if (min(p.first, p.second) > min(vec[i].first, vec[i].second))
+      if (min(min_user.first, min_user.second) > min(users[i].first, users[i].second))
       {
-        p = vec[i];
-        r = i;
+        min_user = users[i];
+        index = i;
       }
     }
 
-    if (p.first > p.second)
+    if (min_user.first > min_user.second)
     {
-      ans[l] = p;
-      l--;
+      sorted[end] = min_user;
+      end--;
     }
     else
     {
-      ans[b] = p;
-      b++;
+      sorted[start] = min_user;
+      start++;
     }
 
-    // Shift elements in vec to remove vec[r]
-    for (int i = r; i < vecSize - 1; i++)
+    for (int i = index; i < remaining - 1; i++)
     {
-      vec[i] = vec[i + 1]; // Move elements left to "erase" vec[r]
+      users[i] = users[i + 1];
     }
-    vecSize--; // Reduce the size after "erasing"
+    remaining--;
   }
 
-  // Output the final sorted array
-  for (int i = 0; i < size; i++)
+  for (int i = 0; i < n; i++)
   {
-    cout << "User " << i + 1 << ": (Arrival: " << ans[i].first << ", Service: " << ans[i].second << ") " << endl;
+    cout << "User " << i + 1 << ": (Arrival: " << sorted[i].first << ", Service: " << sorted[i].second << ") " << endl;
   }
 
   return 0;
