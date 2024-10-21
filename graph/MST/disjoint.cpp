@@ -31,8 +31,8 @@ public:
   }
   void doUnionbyrank(int u, int v)
   {
-    int pu = parent[u];
-    int pv = parent[v];
+    int pu = findUParent(u);
+    int pv = findUParent(v);
 
     if (pu == pv)
       return;
@@ -53,8 +53,8 @@ public:
   }
   void doUnionbysize(int u, int v)
   {
-    int pu = parent[u];
-    int pv = parent[v];
+    int pu = findUParent(u);
+    int pv = findUParent(v);
 
     if (pu == pv)
       return;
