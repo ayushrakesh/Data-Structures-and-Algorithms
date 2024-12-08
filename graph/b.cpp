@@ -1,57 +1,59 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 using namespace std;
 
-int removeStones(vector<vector<int>> &stones)
+void sortPeaksAndValleys(vector<int> &arr)
 {
-    int n = stones.size();
-    unordered_map<pair<int, int>, int> mp;
-    int cnt = 0;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < arr.size(); ++i)
     {
-        int r = stones[i][0];
-        int c = stones[i][1];
-        if (mp.find({r, c}) == mp.end())
-        {
-            mp[{r, c}] = cnt;
-            cnt++;
-        }
-    }
-
-    for (auto it : mp)
-    {
-        cout << it.first << " " << it.second << endl;
-    }
-    return 0;
-}
-class Solution
-{
-public:
-    int removeStones(vector<vector<int>> &stones)
-    {
-        int n = stones.size();
-        unordered_map<pair<int, int>, int> mp;
-        int cnt = 0;
-        for (int i = 0; i < n; i++)
-        {
-            int r = stones[i][0];
-            int c = stones[i][1];
-            if (mp.find({r, c}) == mp.end())
+        if (i % 2 == 0)
+        { // Even index, should be a peak
+            if (i > 0 && arr[i] < arr[i - 1])
             {
-                mp[{r, c}] = cnt;
-                cnt++;
+                swap(arr[i], arr[i - 1]);
+            }
+            if (i < arr.size() - 1 && arr[i] < arr[i + 1])
+            {
+                swap(arr[i], arr[i + 1]);
             }
         }
-
-        for (auto it : mp)
-        {
-            cout << it.first.first << " " << it.first.second << it.second << endl;
+        else
+        { // Odd index, should be a valley
+            if (i > 0 && arr[i] > arr[i - 1])
+            {
+                swap(arr[i], arr[i - 1]);
+            }
+            if (i < arr.size() - 1 && arr[i] > arr[i + 1])
+            {
+                swap(arr[i], arr[i + 1]);
+            }
         }
-        return 0;
     }
-};
+}
+
 int main()
 {
-    vector<vector<int>> v = {{0, 0}, {1, 0}, {0, 1}};
-    Solution s;
-    cout << removeStones(v) << endl;
+    // Hardcoded input array
+    vector<int> arr = {5, 3, 1, 2, 3};
+
+    // Print the original array
+    cout << "Original array: ";
+    for (int num : arr)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    // Sort the array into peaks and valleys
+    sortPeaksAndValleys(arr);
+
+    // Print the sorted array
+    cout << "Array after sorting into peaks and valleys: ";
+    for (int num : arr)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
 }

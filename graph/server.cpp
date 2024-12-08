@@ -1,71 +1,95 @@
 #include <iostream>
+#include <fstream>
 #include <winsock2.h>
+#include <ws2tcpip.h>
+
 #pragma comment(lib, "Ws2_32.lib")
 
-using namespace std;
+#define PORT 8080
+#define BUFFER_SIZE 1024
 
 int main()
 {
-  WSADATA wsa;
-  SOCKET sst, cst;
-  sockaddr_in sdr, cdr;
-  int cds = sizeof(cdr);
+  WSADATA wsaData;
+  SOCKET server_fd = INVALID_SOCKET, new_socket = INVALID_SOCKET;
+  struct sockaddr_in address;
+  int addrlen = sizeof(address);
+  char buffer[BUFFER_SIZE] = {0};
 
-  if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
+  // Initialize Winsock
+  if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
   {
-    cerr << "WSAStartup failed.\n";
-    return 1;
+    std::cerr << "WSAStartup failed. Error Code: " << WSAGetLastError() << "\n";
+    return -1;
   }
 
-  sst = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if (sst == INVALID_SOCKET)
+  // Create socket
+  server_fd = socket(AF_INET, SOCK_STREAM, 0);
+  if (server_fd == INVALID_SOCKET)
   {
-    cerr << "Socket creation failed.\n";
+    std::cerr << "Socket creation failed. Error Code: " << WSAGetLastError() << "\n";
     WSACleanup();
-    return 1;
+    return -1;
   }
 
-  sdr.sin_family = AF_INET;
-  sdr.sin_addr.s_addr = INADDR_ANY;
-  sdr.sin_port = htons(8080);
+  // Bind to port
+  address.sin_family = AF_INET;
+  address.sin_addr.s_addr = INADDR_ANY;
+  address.sin_port = htons(PORT);
 
-  if (bind(sst, (sockaddr *)&sdr, sizeof(sdr)) == SOCKET_ERROR)
+  if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) == SOCKET_ERROR)
   {
-    cerr << "Bind failed.\n";
-    closesocket(sst);
+    std::cerr << "Bind failed. Error Code: " << WSAGetLastError() << "\n";
+    closesocket(server_fd);
     WSACleanup();
-    return 1;
+    return -1;
   }
 
-  if (listen(sst, SOMAXCONN) == SOCKET_ERROR)
+  // Listen for incoming connections
+  if (listen(server_fd, 3) == SOCKET_ERROR)
   {
-    cerr << "Listen failed.\n";
-    closesocket(sst);
+    std::cerr << "Listen failed. Error Code: " << WSAGetLastError() << "\n";
+    closesocket(server_fd);
     WSACleanup();
-    return 1;
+    return -1;
   }
+  std::cout << "Waiting for connection...\n";
 
-  cout << "Server listening on port 8080...\n";
-
-  cst = accept(sst, (sockaddr *)&cdr, &cds);
-  if (cst == INVALID_SOCKET)
+  // Accept a connection
+  new_socket = accept(server_fd, (struct sockaddr *)&address, &addrlen);
+  if (new_socket == INVALID_SOCKET)
   {
-    cerr << "Accept failed.\n";
-    closesocket(sst);
+    std::cerr << "Accept failed. Error Code: " << WSAGetLastError() << "\n";
+    closesocket(server_fd);
     WSACleanup();
-    return 1;
+    return -1;
   }
+  std::cout << "Connection established.\n";
 
-  char buf[1024];
-  int btr = recv(cst, buf, sizeof(buf), 0);
-  if (btr > 0)
+  // Receive file
+  std::ofstream outFile("received_userdata.txt", std::ios::binary);
+  if (!outFile)
   {
-    cout << "Received message from client: " << string(buf, 0, btr) << "\n";
+    std::cerr << "File creation failed.\n";
+    closesocket(new_socket);
+    closesocket(server_fd);
+    WSACleanup();
+    return -1;
   }
 
-  closesocket(cst);
-  closesocket(sst);
+  size_t totalReceived = 0;
+  int bytesRead;
+  while ((bytesRead = recv(new_socket, buffer, BUFFER_SIZE, 0)) > 0)
+  {
+    outFile.write(buffer, bytesRead);
+    totalReceived += bytesRead;
+  }
+
+  std::cout << "File received. Total bytes: " << totalReceived << "\n";
+
+  outFile.close();
+  closesocket(new_socket);
+  closesocket(server_fd);
   WSACleanup();
-
   return 0;
 }
