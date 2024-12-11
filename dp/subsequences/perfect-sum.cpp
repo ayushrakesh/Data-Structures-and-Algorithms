@@ -23,33 +23,19 @@ public:
       for (int j = 1; j <= target; j++)
       {
         if (j >= arr[i])
-          dp[i][j] = (dp[i - 1][j] || dp[i - 1][j - arr[i]]);
+          dp[i][j] = (dp[i - 1][j] + dp[i - 1][j - arr[i]]);
         else
           dp[i][j] = dp[i - 1][j];
       }
     }
   }
 
-  bool isSubsetSum(vector<int> &arr, int target)
+  bool isPerfectSum(vector<int> &arr, int target)
   {
     // code here]
     int n = arr.size();
     vector<vector<int>> dp(n, vector<int>(target + 1, -1));
     tab(n - 1, target, arr, dp);
     return dp[n - 1][target];
-  }
-  bool canPartition(vector<int> &nums)
-  {
-    int n = nums.size();
-    int sum = 0;
-    for (auto it : nums)
-    {
-      sum += it;
-    }
-    if (sum % 2 == 1)
-      return false;
-    vector<vector<int>> dp(n, vector<int>((sum / 2) + 1, -1));
-    tab(n - 1, sum / 2, nums, dp);
-    return dp[n - 1][sum / 2];
   }
 };
