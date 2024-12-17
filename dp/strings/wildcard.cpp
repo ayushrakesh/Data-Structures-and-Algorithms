@@ -70,7 +70,6 @@ public:
           dp[i][j] = false;
       }
     }
-
     return dp[n][m];
   }
   bool isMatch(string s, string p)
