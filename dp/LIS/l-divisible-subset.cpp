@@ -7,6 +7,8 @@ public:
   vector<int> longestIncreasingSubsequence(int n, vector<int> &arr)
   {
     // Code here
+    sort(arr.begin(), arr.end());
+
     vector<int> dp(n, 1);
     vector<int> m(n, -1);
     for (int i = 0; i < n; i++)
@@ -16,7 +18,7 @@ public:
     {
       for (int j = 0; j < i; j++)
       {
-        if (arr[j] < arr[i] && ((dp[j] + 1) > dp[i]))
+        if ((arr[i] % arr[j] == 0) && ((dp[j] + 1) > dp[i]))
         {
           dp[i] = 1 + dp[j];
           m[i] = j;
@@ -33,8 +35,11 @@ public:
       ind = m[ind];
     }
     res.push_back(arr[ind]);
-    res.push_back(arr[ind]);
     reverse(res.begin(), res.end());
     return res;
+  }
+  vector<int> largestDivisibleSubset(vector<int> &nums)
+  {
+    return longestIncreasingSubsequence(nums.size(), nums);
   }
 };
