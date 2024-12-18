@@ -33,7 +33,6 @@ public:
       ind = m[ind];
     }
     res.push_back(arr[ind]);
-    res.push_back(arr[ind]);
     reverse(res.begin(), res.end());
     return res;
   }
