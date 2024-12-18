@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+  vector<int> longestIncreasingSubsequence(int n, vector<int> &arr)
+  {
+    // Code here
+    vector<int> dp(n, 1);
+    vector<int> m(n, -1);
+    for (int i = 0; i < n; i++)
+      m[i] = i;
+
+    for (int i = 1; i < n; i++)
+    {
+      for (int j = 0; j < i; j++)
+      {
+        if (arr[j] < arr[i] && ((dp[j] + 1) > dp[i]))
+        {
+          dp[i] = 1 + dp[j];
+          m[i] = j;
+        }
+      }
+    }
+    vector<int> res;
+    auto it = max_element(dp.begin(), dp.end());
+    int ind = distance(dp.begin(), it);
+    res.push_back(arr[ind]);
+    ind = m[ind];
+
+    while (ind)
+    {
+      res.push_back(arr[ind]);
+      ind = m[ind];
+    }
+    res.push_back(arr[ind]);
+    reverse(res.begin(), res.end());
+    return res;
+  }
+};
