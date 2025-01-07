@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using namespace st;
+using namespace std;
 
 class Solution
 {
