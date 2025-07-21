@@ -6,32 +6,30 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
  * };
  */
 class Solution {
 public:
-    void Paths(TreeNode* root, vector<string>&ans, string s ){
-        if(s.length() != 0){
-            s+="->";
-        }
-        s+=to_string(root->val);
-        if(!root->left && !root->right){
-            ans.push_back(s);
+    void solve(TreeNode* root, vector<string>& res, string s) {
+        if (!root -> left && !root->right) {
+            res.push_back(s+to_string(root->val));
             return;
         }
-        if(root->left){
-            Paths(root->left, ans, s);
+
+        if (root->left) {
+            solve(root->left, res, s+to_string(root->val)+"-"+">");
         }
-        if(root->right){
-            Paths(root->right, ans, s);
+        if (root->right) {
+            solve(root->right, res, s+to_string(root->val)+"-"+">");
         }
 
     }
     vector<string> binaryTreePaths(TreeNode* root) {
-        vector<string>paths;
-        string s;
-        Paths(root, paths, s);
-        return paths;
+        vector<string> res;
+        string s = "";
+        solve(root, res, s);
+        return res;
     }
 };
