@@ -1,42 +1,41 @@
 class Solution {
 public:
-    bool dfs(int node, vector<vector<int>>& graph, vector<int>& v,
-             vector<int>& path, vector<int>& check) {
+    bool dfs(int node, vector<int>& v, vector<int>& path,
+             vector<vector<int>> &graph, vector<int> &check) {
         v[node] = 1;
         path[node] = 1;
-        check[node] = 0;
+        check[node]=0;
 
         for (auto it : graph[node]) {
             if (!v[it]) {
-                if (dfs(it, graph, v, path, check))
+                if(dfs(it, v, path, graph,check)){
+                    check[node]=1;
                     return true;
-            } else if (path[it] == path[node]) {
+                }
+            } else if (path[it]) {
+                check[node]=1;
                 return true;
             }
         }
-        check[node] = 1;
+        check[node]=0;
         path[node] = 0;
         return false;
     }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<int> v(graph.size(), 0);
+        vector<int> path(graph.size(), 0);
         vector<int> res;
-        int n = graph.size();
+        vector<int> check(v.size(), 0);
 
-        vector<int> v(n, 0);
-        vector<int> path(n, 0);
-        vector<int> check(n, 0);
-
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < v.size(); i++) {
             if (!v[i]) {
-                dfs(i, graph, v, path, check);
+                dfs(i, v, path, graph, check);
             }
         }
-        for (int i = 0; i < n; i++) {
-            if (check[i]) {
+        for (int i = 0; i < check.size(); i++) {
+            if (check[i]==0)
                 res.push_back(i);
-            }
         }
-        sort(res.begin(), res.end());
         return res;
     }
 };
